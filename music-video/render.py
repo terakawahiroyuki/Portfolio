@@ -1,6 +1,3 @@
-import os as _os
-SP = _os.environ.get("MV_WORKDIR", _os.path.dirname(_os.path.abspath(__file__)) or ".")
-AUDIO = _os.environ.get("MV_AUDIO", _os.path.join(SP, "Let_It_Ride.mp3"))
 #!/usr/bin/env python3
 """Let It Ride — generative music video renderer.
 
@@ -12,6 +9,9 @@ Usage:
   python3 render.py --png 100,500,900     # dump preview frames
   python3 render.py                       # full render to let_it_ride_mv.mp4
 """
+import os as _os
+SP = _os.environ.get("MV_WORKDIR", _os.path.dirname(_os.path.abspath(__file__)) or ".")
+AUDIO = _os.environ.get("MV_AUDIO", _os.path.join(SP, "Let_It_Ride.mp3"))
 import argparse
 import json
 import math
@@ -28,6 +28,7 @@ import imageio_ffmpeg
 
 W, H = 1280, 720
 FPS = 30
+SHOW_LYRICS = True
 
 # ---------------------------------------------------------------- palette
 CREAM = (255, 243, 214)
@@ -823,8 +824,9 @@ def render_frame(i):
     else:
         img = Image.blend(imgs[0][0], imgs[1][0], imgs[1][1])
     # lyrics
-    for sp in active_lines(t):
-        draw_line_sprite(img, sp, t, en)
+    if SHOW_LYRICS:
+        for sp in active_lines(t):
+            draw_line_sprite(img, sp, t, en)
     draw_section_tag(img, t)
     # progress tape line
     dr = ImageDraw.Draw(img)
@@ -847,11 +849,15 @@ def render_frame(i):
 
 # ---------------------------------------------------------------- main
 def main():
+    global SHOW_LYRICS
     ap = argparse.ArgumentParser()
     ap.add_argument("--png", type=str, default=None)
     ap.add_argument("--range", type=str, default=None, help="start,end seconds (test encode)")
+    ap.add_argument("--no-lyrics", action="store_true",
+                    help="visualizer cut: keep title/section tags/credits, drop sung lyric captions")
     ap.add_argument("--out", type=str, default=f"{SP}/let_it_ride_mv.mp4")
     args = ap.parse_args()
+    SHOW_LYRICS = not args.no_lyrics
 
     if args.png:
         os.makedirs(f"{SP}/preview", exist_ok=True)

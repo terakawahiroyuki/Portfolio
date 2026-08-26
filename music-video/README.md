@@ -52,6 +52,7 @@ python3 align.py
 python3 build_timeline.py
 python3 render.py            # → let_it_ride_mv.mp4(約6分)
 python3 render.py --png 2070 # 単一フレームのプレビュー
+python3 render.py --no-lyrics --out visualizer.mp4  # 歌詞なし(ビジュアライザー)版
 ```
 
 - `meta.txt` は `ffmpeg -i song.mp3 -f ffmetadata meta.txt` で生成(歌詞入りID3タグ)。

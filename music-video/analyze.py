@@ -1,6 +1,3 @@
-import os as _os
-SP = _os.environ.get("MV_WORKDIR", _os.path.dirname(_os.path.abspath(__file__)) or ".")
-AUDIO = _os.environ.get("MV_AUDIO", _os.path.join(SP, "Let_It_Ride.mp3"))
 #!/usr/bin/env python3
 """Audio analysis for the Let It Ride music video.
 
@@ -14,6 +11,9 @@ Saves everything to analysis.npz.
 Also renders a center-channel "vocal" extraction to vocals16k.wav for
 forced alignment with pocketsphinx.
 """
+import os as _os
+SP = _os.environ.get("MV_WORKDIR", _os.path.dirname(_os.path.abspath(__file__)) or ".")
+AUDIO = _os.environ.get("MV_AUDIO", _os.path.join(SP, "Let_It_Ride.mp3"))
 import json
 import subprocess
 import sys

@@ -1,8 +1,8 @@
+#!/usr/bin/env python3
+"""Force-align the known lyrics to the extracted vocal track with pocketsphinx."""
 import os as _os
 SP = _os.environ.get("MV_WORKDIR", _os.path.dirname(_os.path.abspath(__file__)) or ".")
 AUDIO = _os.environ.get("MV_AUDIO", _os.path.join(SP, "Let_It_Ride.mp3"))
-#!/usr/bin/env python3
-"""Force-align the known lyrics to the extracted vocal track with pocketsphinx."""
 import json
 import re
 import wave

@@ -1,6 +1,3 @@
-import os as _os
-SP = _os.environ.get("MV_WORKDIR", _os.path.dirname(_os.path.abspath(__file__)) or ".")
-AUDIO = _os.environ.get("MV_AUDIO", _os.path.join(SP, "Let_It_Ride.mp3"))
 #!/usr/bin/env python3
 """Build timeline.json (sections + lyric line timings) for the renderer.
 
@@ -8,6 +5,9 @@ Uses aligned_words.json from pocketsphinx when available and sane;
 otherwise falls back to a beat-grid hypothesis guided by the structural
 novelty peaks from analyze.py.
 """
+import os as _os
+SP = _os.environ.get("MV_WORKDIR", _os.path.dirname(_os.path.abspath(__file__)) or ".")
+AUDIO = _os.environ.get("MV_AUDIO", _os.path.join(SP, "Let_It_Ride.mp3"))
 import json
 import os
 import sys
