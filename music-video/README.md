@@ -53,7 +53,11 @@ python3 build_timeline.py
 python3 render.py            # → let_it_ride_mv.mp4(約6分)
 python3 render.py --png 2070 # 単一フレームのプレビュー
 python3 render.py --no-lyrics --out visualizer.mp4  # 歌詞なし(ビジュアライザー)版
+python3 render_tiktok.py     # → let_it_ride_tiktok.mp4(TikTok用 30秒 1080×1920 縦型)
 ```
+
+`render_tiktok.py` はヴァース終盤〜コーラス(57.9〜88.0秒、ダウンビートにスナップ)を切り出し、
+縦型レイアウト(UIセーフゾーン考慮)+エンドカード付きで書き出します。
 
 - `meta.txt` は `ffmpeg -i song.mp3 -f ffmetadata meta.txt` で生成(歌詞入りID3タグ)。
 - 音符・スパークル記号に DejaVu Sans(Linux 標準)を使用。パスは環境に合わせて調整してください。
